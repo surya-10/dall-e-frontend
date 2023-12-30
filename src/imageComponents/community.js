@@ -45,8 +45,10 @@ function Community() {
     }
 
     let downloadImage = async (e, imgLink) => {
+        console.log(imgLink)
         e.preventDefault();
-        let response = await fetch(imgLink);
+        let secureLink = "https"+imgLink.slice(4);
+        let response = await fetch(secureLink);
 
         let bolb = await response.blob();
         // console.log(bolb);
