@@ -82,13 +82,15 @@ function Login() {
         setEmail(e.target.value);
     }
 
-    function loginUsingGoogle() {
+    function handleGoogleLogin(credentialResponse){
+        let userCredential = jwtDecode(credentialResponse.credential);
+        setGoogleLogin(userCredential.email);
         let userData = {
-            email: googleEmail,
-            expiretime: Date.now() + 7 * 24 * 60 * 60 * 1000
+            email:googleEmail,
+            expiretime:Date.now() + 7 * 24 * 60 * 60 * 1000
         }
         localStorage.setItem("login-using-google", userData);
-        navigate("/create-image");
+        window.location.href = '/create-image';
     }
 
     function showPass() {
@@ -139,23 +141,18 @@ function Login() {
                             </div>
                             <div className="google-sign">
 
-                                <GoogleLogin
-                                    theme="filled_blue"
-                                    size="large"
-                                    width={280}
-                                    shape="circular"
-                                    style={{ width: '100%' }}
-                                    onSuccess={credentialResponse => {
-                                        let userCredential = jwtDecode(credentialResponse.credential);
-                                        console.log(userCredential);
-                                        setGoogleLogin(userCredential.email);
-                                        loginUsingGoogle();
-                                    }
-                                    }
-                                    onError={(error) => {
-                                        console.log(error);
-                                    }}
+                            <GoogleLogin
+                                theme="filled_blue"
+                                size="large"
+                                width={280}
+                                shape="circular"
+                                style={{ width: '100%' }}
+                                onSuccess={handleGoogleLogin}
+                                onError={(error) => {
+                                    console.log(error);
+                            }}
                                 />
+
 
 
                             </div>
