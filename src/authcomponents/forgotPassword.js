@@ -7,7 +7,7 @@ function ForgotPassword() {
     let navigate = useNavigate();
     async function handleSubmit(e) {
         e.preventDefault();
-        setBtn("Sending");
+        setBtn("Sending....");
         try {
             let obj = {
                 email
