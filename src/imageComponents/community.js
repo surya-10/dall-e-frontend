@@ -44,7 +44,7 @@ function Community() {
         setShowPrompt(null);
     }
 
-    let downloadImage = async (e, imgLink) => {
+    let downloadImage = async (e, imgLink, name) => {
         console.log(imgLink)
         e.preventDefault();
         let secureLink = "https"+imgLink.slice(4);
@@ -58,7 +58,7 @@ function Community() {
         // console.log(blobUrl);
         link.href = blobUrl;
         // link.target = "_blank";
-        link.download = `dall-e-image.png`;
+        link.download = `${name}-dall-e-image.png`;
 
         link.click();
         window.URL.revokeObjectURL(blobUrl);
@@ -136,7 +136,7 @@ function Community() {
                                             {show && showPrompt == post._id && <div className="prompt-container bg-white">
                                                 {showPrompt === post._id && <p className="prompt-msg">{post.message}</p>}
                                                 <div className="d-flex justify-content-between">
-                                                    <a href="" className="download-link"><span class="material-symbols-outlined d-btn" onClick={(e) => downloadImage(e, post.image)}>
+                                                    <a href="" className="download-link"><span class="material-symbols-outlined d-btn" onClick={(e) => downloadImage(e, post.image, post.message)}>
                                                         download
                                                     </span></a>
                                                     <p className="pe-1 fw-bold">{post.name}</p>
@@ -150,7 +150,7 @@ function Community() {
                                             {show && showPrompt == post._id && <div className="prompt-container bg-white">
                                                 {showPrompt === post._id && <p className="prompt-msg">{post.message}</p>}
                                                 <div className="d-flex justify-content-between">
-                                                    <a href="" className="download-link"><span class="material-symbols-outlined d-btn" onClick={(e) => downloadImage(e, post.image)}>
+                                                    <a href="" className="download-link"><span class="material-symbols-outlined d-btn" onClick={(e) => downloadImage(e, post.image, post.message)}>
                                                         download
                                                     </span></a>
                                                     <p className="pe-1 fw-bold">{post.name}</p>
